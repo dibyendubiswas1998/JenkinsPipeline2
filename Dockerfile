@@ -23,4 +23,4 @@ ENV STREAMLIT_SERVER_HEADLESS=true
 ENV STREAMLIT_SERVER_PORT=8501
 
 # Run streamlit app
-CMD ["streamlit", "run", "chatapp.py"]
+CMD ["streamlit", "run", "app.py"]
