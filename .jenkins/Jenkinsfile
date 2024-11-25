@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Cloning the repository...'
+                checkout scm
+            }
+        }
+
+        // Continuous  Integration (CI):
+        stages("Continuous  Integration (CI)") {
+            steps {
+                // Create a Docker Image
+                echo 'Creating a Docker Image...'
+                sh 'sudo docker build -t dibyendubiswas1998/myapp:latest .'
+
+                // Push the Docker Image to the DockerHUB repository:
+                echo 'Pushing the Docker Image to DockerHUB...'
+                sh 'sudo docker push dibyendubiswas1998/myapp:latest'
+            }
+        }
+
+        // Continuous  Deployment (CD):
+        stages("Continuous  Deployment (CD)") {
+            steps{
+                // Clone the image from the DockerHUB repository
+                echo 'Cloning the image from DockerHUB...'
+                sh 'sudo docker pull dibyendbiswas1998/myapp:latest'
+
+                // Run the Docker Container by Port mapping:
+                echo 'Running the Docker Container...'
+                sh 'sudo docker run -p 8501:8501 dibyendubiswas1998/myapp:latest'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline finished!'
+        }
+        success {
+            echo 'Application deployed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed. Check the logs.'
+        }
+    }
+}
