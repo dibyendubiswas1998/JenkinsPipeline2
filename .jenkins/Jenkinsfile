@@ -10,7 +10,7 @@ pipeline {
         }
 
         // Continuous  Integration (CI):
-        stages("Continuous  Integration") {
+        stage("Continuous  Integration") {
             steps {
                 // Create a Docker Image
                 echo 'Creating a Docker Image...'
@@ -23,7 +23,7 @@ pipeline {
         }
 
         // Continuous  Deployment (CD):
-        stages("Continuous  Deployment") {
+        stage("Continuous  Deployment") {
             steps{
                 // Clone the image from the DockerHUB repository
                 echo 'Cloning the image from DockerHUB...'
