@@ -28,10 +28,6 @@ pipeline {
                 // Push the Docker Image to the DockerHub repository
                 echo 'Pushing the Docker Image to DockerHub...'
                 sh 'docker push $APP_NAME:latest' // APP_NAME: is latest docker image
-
-                // Delete the Docker Image from the Curret Machine:
-                echo 'Deleting the Docker Image from the Current Machine...'
-                sh 'docker rmi -f $APP_NAME:latest' // APP_NAME: is latest docker image
             }
         }
 
@@ -39,8 +35,8 @@ pipeline {
         stage("Continuous Deployment") {
             steps {
                 // Clone the image from DockerHub
-                echo 'Cloning the image from DockerHub...'
-                sh 'docker pull $APP_NAME:latest'
+                // echo 'Cloning the image from DockerHub...'
+                // sh 'docker pull $APP_NAME:latest'
 
                 // Run the Docker Container with port mapping
                 echo 'Running the Docker Container...'
