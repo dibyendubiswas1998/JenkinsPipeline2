@@ -16,9 +16,12 @@ pipeline {
 
         stage("Continuous Integration") {
             steps {
+                // Stop any running containers
+                sh 'docker-compose down || true'
+                
                 // Remove any previously built images related to the app
                 echo 'Removing old Docker images...'
-                sh 'docker images $APP_NAME -q | xargs -r docker rmi || true'  // Deletes all previous images for the app
+                sh "docker images $APP_NAME -q | xargs -r docker rmi || true"  // Deletes all previous images for the app
 
                 // Create a new Docker Image
                 echo 'Building the Docker image...'
@@ -42,9 +45,6 @@ pipeline {
             steps {
                 echo 'Deploying application using Docker Compose...'
                 
-                // Stop any running containers
-                sh 'docker-compose down || true'
-
                 // Start the application using Docker Compose
                 sh 'docker-compose up -d'
             }
