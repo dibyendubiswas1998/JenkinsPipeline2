@@ -3,11 +3,12 @@ version: '3'
 services:
   streamlit-app:
     build:
-      context: . # Use the current directory for the Dockerfile
+      context: .
       dockerfile: Dockerfile
+    image: dibyendubiswas1998/myapp2:latest  # Explicitly define the image name and tag
     ports:
-      - "8501:8501" # Map container port 8501 to host port 8501
+      - "8501:8501"
     environment:
       - STREAMLIT_SERVER_HEADLESS=true
       - STREAMLIT_SERVER_PORT=8501
-    restart: always # Ensure the container restarts on failure
+    restart: always
