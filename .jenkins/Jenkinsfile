@@ -20,13 +20,16 @@ pipeline {
                 echo 'Building the Docker image...'
                 sh 'docker-compose build'
 
+                // List Docker images to verify the build
+                echo 'Listing Docker images...'
+                sh 'docker images'
+
                 // Login to DockerHub
                 echo 'Logging into DockerHub...'
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 
-                // Tag the image and push it to DockerHub
-                echo 'Tagging and pushing the Docker image to DockerHub...'
-                sh 'docker tag ${APP_NAME}:latest $APP_NAME:latest'
+                // Push the Docker image to DockerHub
+                echo 'Pushing the Docker image to DockerHub...'
                 sh 'docker push $APP_NAME:latest'
             }
         }
