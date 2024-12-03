@@ -16,7 +16,11 @@ pipeline {
 
         stage("Continuous Integration") {
             steps {
-                // Create a Docker Image
+                // Remove any previously built images related to the app
+                echo 'Removing old Docker images...'
+                sh 'docker images $APP_NAME -q | xargs -r docker rmi || true'  // Deletes all previous images for the app
+
+                // Create a new Docker Image
                 echo 'Building the Docker image...'
                 sh 'docker-compose build'
 
