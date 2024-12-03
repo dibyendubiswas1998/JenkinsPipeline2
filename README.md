@@ -1,5 +1,6 @@
-# First Jenkins Pipeline:
-Simple Pipeline for Deploy the application on EC2 Instance (inside Jenkins Master Node).
+# Second Jenkins Pipeline:
+Simple Pipeline for Deploying the application on EC2 Instance (inside Jenkins Master Node).<be>
+**Note:** Here I use docker-compose concepts to rebuild and rerun and redeploy the application.
 
 ## Steps:
 * Create the Application,
